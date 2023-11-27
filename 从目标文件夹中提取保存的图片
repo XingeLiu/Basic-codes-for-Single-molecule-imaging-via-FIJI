@@ -1,0 +1,26 @@
+import os
+import shutil
+
+def copy_images_to_parent_folder(parent_folder):
+    # 遍历父文件夹中的所有子文件夹
+    for folder_name in os.listdir(parent_folder):
+        folder_path = os.path.join(parent_folder, folder_name)
+        
+        # 确保这是一个文件夹
+        if os.path.isdir(folder_path):
+            # 遍历子文件夹中的所有文件
+            for file_name in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, file_name)
+                
+                # 检查是否是图片文件（这里假设图片文件的扩展名是.jpg或.png）
+                if file_name.lower().endswith(('.tif')):
+                    # 定义新的文件路径（在父文件夹下）
+                    new_file_path = os.path.join(parent_folder, file_name)
+                    
+                    # 复制文件
+                    shutil.copy2(file_path, new_file_path)
+                    print(f"Copied {file_path} to {new_file_path}")
+
+# 使用示例
+parent_folder =r'F:\Xinge\FISH CY5\Location3'
+copy_images_to_parent_folder(parent_folder)
